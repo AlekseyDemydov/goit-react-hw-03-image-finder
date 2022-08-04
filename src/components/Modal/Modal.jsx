@@ -25,13 +25,4 @@ class Modal extends Component {
   }
 }
 
-// const Modal = ({ data }) => {
-//   return data.map(e => (
-//     <div className="overlay">
-//       <div className="modal">
-//         <img src={e.largeImageURL} alt={e.tags} />
-//       </div>
-//     </div>
-//   ));
-// };
 export default Modal;
