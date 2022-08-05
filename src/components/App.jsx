@@ -5,7 +5,7 @@ import ImageGallery from './ImageGallery/ImageGallery';
 import ImageGalleryItem from './ImageGalleryItem/ImageGalleryItem';
 import Modal from './Modal/Modal';
 import SerchBar from './Searchbar/SearchBar';
-import { Audio } from 'react-loader-spinner';
+import { Bars } from 'react-loader-spinner';
 
 export class App extends Component {
   state = {
@@ -13,33 +13,24 @@ export class App extends Component {
     query: '',
     totalHits: null,
     data: [],
-    status: 'static',
     showModal: false,
     objectModal: {},
-    loader: false,
   };
 
   componentDidUpdate(prevProps, prevState) {
     const { query, page } = this.state;
     if (prevState.query !== query || prevState.page !== page) {
-      this.setState({ status: 'loading' });
       this.dataRequest();
     }
   }
 
   async dataRequest() {
     const { page, query } = this.state;
-    try {
-      const data = await api(query, page);
-
-      this.setState(prevState => ({
-        data: [...prevState.data, ...data.hits],
-        status: 'static',
-        totalHits: data.totalHits,
-      }));
-    } catch (error) {
-      this.setState({ status: 'error', error });
-    }
+    const data = await api(query, page);
+    this.setState(prevState => ({
+      data: [...prevState.data, ...data.hits],
+      totalHits: data.totalHits,
+    }));
   }
   onSubmit = async query => {
     if (this.state.query === query && this.state.page === 1) return;
@@ -72,7 +63,7 @@ export class App extends Component {
           </ImageGallery>
         )}
         {totalPage > page && <Button onClick={this.btnLoad} />}
-        <Audio
+        <Bars
           height="80"
           width="80"
           radius="9"
