@@ -206,3 +206,9 @@ img {
 .button:focus {
   background-color: #303f9f;
 }
+
+
+.loader{
+  display: flex;
+  margin: 0 auto;
+}

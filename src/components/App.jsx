@@ -15,11 +15,14 @@ export class App extends Component {
     data: [],
     showModal: false,
     objectModal: {},
+    loading: false,
   };
 
   componentDidUpdate(prevProps, prevState) {
     const { query, page } = this.state;
+
     if (prevState.query !== query || prevState.page !== page) {
+      this.setState({ loading: true });
       this.dataRequest();
     }
   }
@@ -30,6 +33,7 @@ export class App extends Component {
     this.setState(prevState => ({
       data: [...prevState.data, ...data.hits],
       totalHits: data.totalHits,
+      loading: false,
     }));
   }
   onSubmit = async query => {
@@ -48,7 +52,8 @@ export class App extends Component {
     this.setState(prevState => ({ page: prevState.page + 1 }));
   };
   render() {
-    const { data, showModal, objectModal, page, totalHits } = this.state;
+    const { data, showModal, objectModal, page, totalHits, loading } =
+      this.state;
     const totalPage = Math.ceil(totalHits / 12);
     return (
       <div className="app">
@@ -62,16 +67,23 @@ export class App extends Component {
             />
           </ImageGallery>
         )}
+
+        {loading === true && (
+          <div className="loader">
+            <Bars
+              height="80"
+              width="80"
+              radius="9"
+              color="#3f51b5"
+              ariaLabel="three-dots-loading"
+              wrapperStyle
+              wrapperClass
+            />
+          </div>
+        )}
+
         {totalPage > page && <Button onClick={this.btnLoad} />}
-        <Bars
-          height="80"
-          width="80"
-          radius="9"
-          color="#3f51b5"
-          ariaLabel="three-dots-loading"
-          wrapperStyle
-          wrapperClass
-        />
+
         {showModal && (
           <Modal objectModal={objectModal} toggleModal={this.toggleModal} />
         )}
