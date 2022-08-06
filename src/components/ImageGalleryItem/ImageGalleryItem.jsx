@@ -1,6 +1,6 @@
-const ImageGalleryItem = ({ data, onModal, toggleModal }) => {
+const ImageGalleryItem = ({ data, onModal }) => {
   return data.map(el => (
-    <li className="imageGalleryItem" key={el.id} onClick={toggleModal}>
+    <li className="imageGalleryItem" key={el.id}>
       <img
         src={el.webformatURL}
         className="imageGalleryItem-image"

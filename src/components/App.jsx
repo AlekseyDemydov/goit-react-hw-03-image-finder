@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import api from './api/api';
+import api from '../api/api';
 import Button from './Button/Button';
 import ImageGallery from './ImageGallery/ImageGallery';
 import ImageGalleryItem from './ImageGalleryItem/ImageGalleryItem';
@@ -47,6 +47,7 @@ export class App extends Component {
   };
   dataModal = (src, alt) => {
     this.setState({ objectModal: { src, alt } });
+    this.toggleModal();
   };
   btnLoad = () => {
     this.setState(prevState => ({ page: prevState.page + 1 }));
@@ -60,11 +61,7 @@ export class App extends Component {
         <SerchBar onSubmit={this.onSubmit} />
         {data.length > 0 && (
           <ImageGallery>
-            <ImageGalleryItem
-              data={data}
-              onModal={this.dataModal}
-              toggleModal={this.toggleModal}
-            />
+            <ImageGalleryItem data={data} onModal={this.dataModal} />
           </ImageGallery>
         )}
 
