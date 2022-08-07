@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import s from './App.module.css';
 import api from '../api/api';
 import Button from './Button/Button';
 import ImageGallery from './ImageGallery/ImageGallery';
@@ -38,6 +39,8 @@ export class App extends Component {
       }));
     } catch (error) {
       alert('error');
+    } finally {
+      this.setState({ loading: false });
     }
   }
   onSubmit = async query => {
@@ -61,7 +64,7 @@ export class App extends Component {
       this.state;
     const totalPage = Math.ceil(totalHits / 12);
     return (
-      <div className="app">
+      <div className={s.app}>
         <SerchBar onSubmit={this.onSubmit} />
         {data.length > 0 && (
           <ImageGallery>
@@ -70,7 +73,7 @@ export class App extends Component {
         )}
 
         {loading === true && (
-          <div className="loader">
+          <div className={s.loader}>
             <Bars
               height="80"
               width="80"

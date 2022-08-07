@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import s from './Modal.module.css';
 
 class Modal extends Component {
   componentDidMount() {
@@ -22,8 +23,8 @@ class Modal extends Component {
   render() {
     const { objectModal } = this.props;
     return (
-      <div className="overlay" onClick={this.handleCloseBackdrop}>
-        <div className="modal">
+      <div className={s.overlay} onClick={this.handleCloseBackdrop}>
+        <div className={s.modal}>
           <img src={objectModal.src} alt={objectModal.alt} />
         </div>
       </div>

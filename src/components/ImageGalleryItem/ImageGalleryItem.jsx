@@ -1,9 +1,10 @@
+import s from './ImageGalleryItem.module.css';
 const ImageGalleryItem = ({ data, onModal }) => {
   return data.map(el => (
-    <li className="imageGalleryItem" key={el.id}>
+    <li className={s.imageGalleryItem} key={el.id}>
       <img
         src={el.webformatURL}
-        className="imageGalleryItem-image"
+        className={s.imageGalleryItemImage}
         alt={el.tags}
         onClick={() => onModal(el.largeImageURL, el.tags)}
       />
