@@ -29,12 +29,16 @@ export class App extends Component {
 
   async dataRequest() {
     const { page, query } = this.state;
-    const data = await api(query, page);
-    this.setState(prevState => ({
-      data: [...prevState.data, ...data.hits],
-      totalHits: data.totalHits,
-      loading: false,
-    }));
+    try {
+      const data = await api(query, page);
+      this.setState(prevState => ({
+        data: [...prevState.data, ...data.hits],
+        totalHits: data.totalHits,
+        loading: false,
+      }));
+    } catch (error) {
+      alert('error');
+    }
   }
   onSubmit = async query => {
     if (this.state.query === query && this.state.page === 1) return;
