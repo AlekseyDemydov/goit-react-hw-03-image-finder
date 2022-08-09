@@ -23,13 +23,13 @@ export class App extends Component {
     const { query, page } = this.state;
 
     if (prevState.query !== query || prevState.page !== page) {
-      this.setState({ loading: true });
       this.dataRequest();
     }
   }
 
   async dataRequest() {
     const { page, query } = this.state;
+    this.setState({ loading: true });
     try {
       const data = await api(query, page);
       this.setState(prevState => ({
